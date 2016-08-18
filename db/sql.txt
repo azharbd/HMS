@@ -1,2 +1,523 @@
 
-dfsdf
+/****** Object:  Table [dbo].[dbo_Admission]    Script Date: 8/18/2016 7:14:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[dbo_Admission](
+	[Admission_Id] [int] NOT NULL,
+	[P_ID] [int] NOT NULL,
+	[Reference_Doc_ID] [int] NOT NULL,
+	[Under_Doc_ID] [int] NOT NULL,
+	[CreatedOn] [smalldatetime] NOT NULL,
+	[Admission_SL] [int] NOT NULL,
+	[UpdatedOn] [smalldatetime] NULL,
+ CONSTRAINT [PK_dbo_Admission] PRIMARY KEY CLUSTERED 
+(
+	[Admission_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[dbo_Admission_Consultant_Visit_Charge]    Script Date: 8/18/2016 7:14:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[dbo_Admission_Consultant_Visit_Charge](
+	[ID] [int] NOT NULL,
+	[Doc_ID] [int] NOT NULL,
+	[Admission_ID] [int] NOT NULL,
+	[Visit_Type] [int] NOT NULL,
+	[Amount] [int] NOT NULL,
+	[Doc_Procedure] [varchar](500) NULL,
+	[Doc_Medicin] [varchar](500) NULL,
+	[Comment] [varchar](300) NULL,
+ CONSTRAINT [PK_dbo_Admission_Consultant_Visit_Charge] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[dbo_CashMemo]    Script Date: 8/18/2016 7:14:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[dbo_CashMemo](
+	[CM_ID] [int] NOT NULL,
+	[CM_SL] [int] NOT NULL,
+	[CreatedOn] [smalldatetime] NOT NULL,
+	[InvetigationID] [int] NULL,
+	[Admission_ID] [int] NULL,
+	[Pay_Amount] [int] NOT NULL,
+	[Due] [int] NOT NULL,
+ CONSTRAINT [PK_dbo_CashMemo] PRIMARY KEY CLUSTERED 
+(
+	[CM_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[dbo_Department]    Script Date: 8/18/2016 7:14:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[dbo_Department](
+	[DeptID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](30) NOT NULL,
+	[Description] [varchar](100) NULL,
+ CONSTRAINT [PK_dbo_Department] PRIMARY KEY CLUSTERED 
+(
+	[DeptID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[dbo_Designation]    Script Date: 8/18/2016 7:14:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[dbo_Designation](
+	[DegId] [int] IDENTITY(1,1) NOT NULL,
+	[DeptID] [int] NOT NULL,
+	[Designation] [varchar](30) NOT NULL,
+ CONSTRAINT [PK_dbo_Designation] PRIMARY KEY CLUSTERED 
+(
+	[DegId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[dbo_Doctor_List]    Script Date: 8/18/2016 7:14:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[dbo_Doctor_List](
+	[DocID] [int] NOT NULL,
+	[Title] [varchar](100) NOT NULL,
+	[Name] [varchar](75) NOT NULL,
+	[Degree] [varchar](100) NOT NULL,
+	[Doctype] [varchar](20) NOT NULL,
+	[Phone] [varchar](25) NOT NULL,
+	[IsPc] [int] NOT NULL,
+	[Address] [varchar](150) NOT NULL,
+	[Area] [varchar](150) NOT NULL,
+	[Specialist] [varchar](50) NOT NULL,
+	[Doctor_Type] [tinyint] NOT NULL,
+	[MarketingBy] [int] NOT NULL,
+	[AutoDiscount] [bit] NOT NULL,
+	[CreatedOn] [smalldatetime] NOT NULL,
+	[UPdateOn] [smalldatetime] NULL,
+ CONSTRAINT [PK_dbo_Doctor_List] PRIMARY KEY CLUSTERED 
+(
+	[DocID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[dbo_Doctor_Specialist]    Script Date: 8/18/2016 7:14:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[dbo_Doctor_Specialist](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[DocID] [int] NOT NULL,
+	[SPID] [int] NOT NULL,
+ CONSTRAINT [PK_dbo_Doctor_Specialist] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Dbo_Doctor_Visit_Charge]    Script Date: 8/18/2016 7:14:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Dbo_Doctor_Visit_Charge](
+	[DVC_ID] [int] NOT NULL,
+	[DOc_ID] [int] NOT NULL,
+	[First_Time_Visit] [int] NOT NULL,
+	[Second_Time_Visit] [int] NOT NULL,
+	[Student_Fee] [int] NOT NULL,
+	[OPD_Commission] [int] NOT NULL,
+	[Pathology_Commision] [int] NOT NULL,
+	[Room_No] [int] NOT NULL,
+	[Health_Fee] [int] NOT NULL,
+	[Unit] [int] NOT NULL,
+	[Time] [time](7) NOT NULL,
+ CONSTRAINT [PK_Dbo_Doctor_Visit_Charge] PRIMARY KEY CLUSTERED 
+(
+	[DVC_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[dbo_Employee_Designation]    Script Date: 8/18/2016 7:14:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[dbo_Employee_Designation](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[EmpID] [int] NOT NULL,
+	[DegID] [int] NOT NULL,
+ CONSTRAINT [PK_dbo_Employee_Designation] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[dbo_Employee_Profiles]    Script Date: 8/18/2016 7:14:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[dbo_Employee_Profiles](
+	[EmpID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](70) NOT NULL,
+	[PresentAddress] [varchar](150) NOT NULL,
+	[Gender] [char](1) NOT NULL,
+	[BloodGroup] [char](2) NULL,
+	[JoiningDate] [smalldatetime] NULL,
+	[Phone] [varchar](20) NULL,
+	[DateOfBirth] [date] NULL,
+	[ParmanentAddress] [varchar](150) NULL,
+	[Area] [varchar](25) NULL,
+	[EmploymentType] [tinyint] NOT NULL,
+	[IsCommession] [bit] NULL,
+	[IsEmployment] [bit] NULL,
+	[Basic] [int] NULL,
+	[CreatedOn] [smalldatetime] NOT NULL,
+	[UpdatedOn] [smalldatetime] NULL,
+	[IsTemporary] [bit] NULL,
+ CONSTRAINT [PK_dbo_Employee_Profiles] PRIMARY KEY CLUSTERED 
+(
+	[EmpID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[dbo_InvertigationServiceItem]    Script Date: 8/18/2016 7:14:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[dbo_InvertigationServiceItem](
+	[ISI_ID] [int] NOT NULL,
+	[Investigationid] [int] NOT NULL,
+	[Service_ID] [int] NOT NULL,
+	[Date] [smalldatetime] NOT NULL,
+	[Status] [tinyint] NOT NULL,
+	[Admission_ID] [int] NOT NULL,
+ CONSTRAINT [PK_dbo_InvertigationServiceItem] PRIMARY KEY CLUSTERED 
+(
+	[ISI_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[dbo_Investigation]    Script Date: 8/18/2016 7:14:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[dbo_Investigation](
+	[InvestigationID] [int] NOT NULL,
+	[DocID] [int] NOT NULL,
+	[DiscountByID] [int] NULL,
+	[DiscountTK] [int] NOT NULL,
+	[DiscountPasentance] [int] NOT NULL,
+	[TotalDue] [int] NOT NULL,
+	[InvestigationType] [tinyint] NULL,
+	[InvestigationDeptType] [tinyint] NULL,
+	[P_ID] [int] NOT NULL,
+	[CreatedON] [smalldatetime] NOT NULL,
+	[UpdatedOn] [smalldatetime] NULL,
+	[Invetigation_SL] [int] NOT NULL,
+ CONSTRAINT [PK_dbo_Investigation] PRIMARY KEY CLUSTERED 
+(
+	[InvestigationID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[dbo_Marketing_Target]    Script Date: 8/18/2016 7:14:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[dbo_Marketing_Target](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[EmpID] [int] NOT NULL,
+	[SetTargetDate] [date] NOT NULL,
+	[Target] [int] NOT NULL,
+	[CreatedON] [smalldatetime] NOT NULL,
+	[isActive] [bit] NOT NULL,
+ CONSTRAINT [PK_dbo_Marketing_Target] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[dbo_Monthly_SalaryPay]    Script Date: 8/18/2016 7:14:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[dbo_Monthly_SalaryPay](
+	[Id] [int] NOT NULL,
+	[EmpID] [int] NOT NULL,
+	[SalaryMonth] [int] NOT NULL,
+	[SalaryYear] [int] NOT NULL,
+	[Basic] [int] NOT NULL,
+	[HouseRent] [int] NOT NULL,
+	[Medical] [int] NOT NULL,
+	[Commession] [int] NOT NULL,
+	[other] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Dbo_Other_Service_List]    Script Date: 8/18/2016 7:14:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Dbo_Other_Service_List](
+	[OSL_ID] [int] NOT NULL,
+	[Name] [varchar](100) NOT NULL,
+	[Description] [varchar](150) NOT NULL,
+	[Amount] [int] NOT NULL,
+	[Head] [varchar](50) NULL,
+	[RMay_cha] [varchar](50) NULL,
+	[Fiexed] [int] NULL,
+ CONSTRAINT [PK_Dbo_Other_Service_List] PRIMARY KEY CLUSTERED 
+(
+	[OSL_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[dbo_Patient_info]    Script Date: 8/18/2016 7:14:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[dbo_Patient_info](
+	[P_ID] [int] NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[PresentAddress] [varchar](300) NULL,
+	[Phone] [varchar](20) NULL,
+	[Year] [int] NULL,
+	[Month] [int] NULL,
+	[Day] [int] NULL,
+	[Gender] [char](1) NULL,
+ CONSTRAINT [PK_dbo_Patient_info] PRIMARY KEY CLUSTERED 
+(
+	[P_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[dbo_Patient_other_info]    Script Date: 8/18/2016 7:14:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[dbo_Patient_other_info](
+	[PO_ID] [int] NOT NULL,
+	[P_ID] [int] NOT NULL,
+	[IsFather] [bit] NOT NULL,
+	[ForH_Name] [varchar](50) NULL,
+	[Region] [varchar](10) NULL,
+	[Occupation] [varchar](100) NULL,
+	[Guardian] [varchar](100) NULL,
+	[Parmanent_address] [varchar](300) NULL,
+ CONSTRAINT [PK_dbo_Patient_other_info] PRIMARY KEY CLUSTERED 
+(
+	[PO_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Dbo_Services]    Script Date: 8/18/2016 7:14:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Dbo_Services](
+	[Service_ID] [int] NOT NULL,
+	[Department] [int] NOT NULL,
+	[Service_Name] [varchar](150) NOT NULL,
+	[Amount] [int] NOT NULL,
+	[Commission] [int] NOT NULL,
+	[Commision_Type] [tinyint] NOT NULL,
+	[Dutaion] [int] NOT NULL,
+	[Duraion_Type] [tinyint] NOT NULL,
+	[CC_PC] [int] NOT NULL,
+	[Sample_Type] [varchar](20) NULL,
+	[isSample] [bit] NOT NULL,
+ CONSTRAINT [PK_Dbo_Services] PRIMARY KEY CLUSTERED 
+(
+	[Service_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[dbo_Specialist]    Script Date: 8/18/2016 7:14:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[dbo_Specialist](
+	[SPID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](75) NOT NULL,
+ CONSTRAINT [PK_dbo_Specialist] PRIMARY KEY CLUSTERED 
+(
+	[SPID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[PatientServiceTaken]    Script Date: 8/18/2016 7:14:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[PatientServiceTaken](
+	[PST_ID] [int] NOT NULL,
+	[Admission_ID] [int] NOT NULL,
+	[Quentity] [int] NOT NULL,
+	[OSL_ID] [int] NULL,
+	[Date_For] [smalldatetime] NOT NULL,
+	[Remarks] [varchar](300) NULL,
+ CONSTRAINT [PK_PatientServiceTaken] PRIMARY KEY CLUSTERED 
+(
+	[PST_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+ALTER TABLE [dbo].[dbo_Admission] ADD  CONSTRAINT [DF_dbo_Admission_CreatedOn]  DEFAULT (getdate()) FOR [CreatedOn]
+GO
+ALTER TABLE [dbo].[dbo_Doctor_List] ADD  CONSTRAINT [DF_dbo_Doctor_List_IsPc]  DEFAULT ((0)) FOR [IsPc]
+GO
+ALTER TABLE [dbo].[dbo_Doctor_List] ADD  CONSTRAINT [DF_dbo_Doctor_List_Doctor_Type]  DEFAULT ((0)) FOR [Doctor_Type]
+GO
+ALTER TABLE [dbo].[dbo_Doctor_List] ADD  CONSTRAINT [DF_dbo_Doctor_List_MarketingBy]  DEFAULT ((0)) FOR [MarketingBy]
+GO
+ALTER TABLE [dbo].[dbo_Doctor_List] ADD  CONSTRAINT [DF_dbo_Doctor_List_AutoDiscount]  DEFAULT ((0)) FOR [AutoDiscount]
+GO
+ALTER TABLE [dbo].[dbo_Doctor_List] ADD  CONSTRAINT [DF_dbo_Doctor_List_CreatedOn]  DEFAULT (getdate()) FOR [CreatedOn]
+GO
+ALTER TABLE [dbo].[dbo_Employee_Profiles] ADD  CONSTRAINT [DF_dbo_Employee_Profiles_EmploymentType]  DEFAULT ((0)) FOR [EmploymentType]
+GO
+ALTER TABLE [dbo].[dbo_Employee_Profiles] ADD  CONSTRAINT [DF_dbo_Employee_Profiles_CreatedOn]  DEFAULT (getdate()) FOR [CreatedOn]
+GO
+ALTER TABLE [dbo].[dbo_Employee_Profiles] ADD  CONSTRAINT [DF_dbo_Employee_Profiles_IsTemporary]  DEFAULT ((1)) FOR [IsTemporary]
+GO
+ALTER TABLE [dbo].[dbo_InvertigationServiceItem] ADD  CONSTRAINT [DF_dbo_InvertigationServiceItem_Date]  DEFAULT (getdate()) FOR [Date]
+GO
+ALTER TABLE [dbo].[dbo_InvertigationServiceItem] ADD  CONSTRAINT [DF_dbo_InvertigationServiceItem_Status]  DEFAULT ((0)) FOR [Status]
+GO
+ALTER TABLE [dbo].[dbo_InvertigationServiceItem] ADD  CONSTRAINT [DF_dbo_InvertigationServiceItem_Admission_ID]  DEFAULT ((0)) FOR [Admission_ID]
+GO
+ALTER TABLE [dbo].[dbo_Investigation] ADD  CONSTRAINT [DF_dbo_Investigation_DiscountTK]  DEFAULT ((0)) FOR [DiscountTK]
+GO
+ALTER TABLE [dbo].[dbo_Investigation] ADD  CONSTRAINT [DF_dbo_Investigation_DiscountPasentance]  DEFAULT ((0)) FOR [DiscountPasentance]
+GO
+ALTER TABLE [dbo].[dbo_Investigation] ADD  CONSTRAINT [DF_dbo_Investigation_TotalDue]  DEFAULT ((0)) FOR [TotalDue]
+GO
+ALTER TABLE [dbo].[dbo_Investigation] ADD  CONSTRAINT [DF_dbo_Investigation_CreatedON]  DEFAULT (getdate()) FOR [CreatedON]
+GO
+ALTER TABLE [dbo].[dbo_Marketing_Target] ADD  CONSTRAINT [DF_dbo_Marketing_Target_isActive]  DEFAULT ((0)) FOR [isActive]
+GO
+ALTER TABLE [dbo].[dbo_Monthly_SalaryPay] ADD  CONSTRAINT [DF_dbo_Monthly_SalaryPay_Basic]  DEFAULT ((0)) FOR [Basic]
+GO
+ALTER TABLE [dbo].[dbo_Monthly_SalaryPay] ADD  CONSTRAINT [DF_dbo_Monthly_SalaryPay_HouseRent]  DEFAULT ((0)) FOR [HouseRent]
+GO
+ALTER TABLE [dbo].[dbo_Monthly_SalaryPay] ADD  CONSTRAINT [DF_dbo_Monthly_SalaryPay_Medical]  DEFAULT ((0)) FOR [Medical]
+GO
+ALTER TABLE [dbo].[dbo_Monthly_SalaryPay] ADD  CONSTRAINT [DF_dbo_Monthly_SalaryPay_Commession]  DEFAULT ((0)) FOR [Commession]
+GO
+ALTER TABLE [dbo].[dbo_Monthly_SalaryPay] ADD  CONSTRAINT [DF_dbo_Monthly_SalaryPay_other]  DEFAULT ((0)) FOR [other]
+GO
+ALTER TABLE [dbo].[Dbo_Other_Service_List] ADD  CONSTRAINT [DF_Dbo_Other_Service_List_Amount]  DEFAULT ((0)) FOR [Amount]
+GO
+ALTER TABLE [dbo].[dbo_Patient_other_info] ADD  CONSTRAINT [DF_dbo_Patient_other_info_IsFather]  DEFAULT ((0)) FOR [IsFather]
+GO
+ALTER TABLE [dbo].[Dbo_Services] ADD  CONSTRAINT [DF_Dbo_Services_Commission]  DEFAULT ((0)) FOR [Commission]
+GO
+ALTER TABLE [dbo].[Dbo_Services] ADD  CONSTRAINT [DF_Dbo_Services_Commision_Type]  DEFAULT ((0)) FOR [Commision_Type]
+GO
+ALTER TABLE [dbo].[Dbo_Services] ADD  CONSTRAINT [DF_Dbo_Services_Duraion_Type]  DEFAULT ((0)) FOR [Duraion_Type]
+GO
+ALTER TABLE [dbo].[Dbo_Services] ADD  CONSTRAINT [DF_Dbo_Services_isSample]  DEFAULT ((0)) FOR [isSample]
+GO
+ALTER TABLE [dbo].[PatientServiceTaken] ADD  CONSTRAINT [DF_PatientServiceTaken_Quentity]  DEFAULT ((1)) FOR [Quentity]
+GO
+ALTER TABLE [dbo].[PatientServiceTaken] ADD  CONSTRAINT [DF_PatientServiceTaken_Date_For]  DEFAULT (getdate()) FOR [Date_For]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'0-Employee,1-MarketingOfficer,2-Doctor,3-PC' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'dbo_Employee_Profiles', @level2type=N'COLUMN',@level2name=N'EmploymentType'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'0:Sample Collection,1: Test Complete, 2: Report Complate, 3: Report Aproved' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'dbo_InvertigationServiceItem', @level2type=N'COLUMN',@level2name=N'Status'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'1:Gen, 2:OPD,3:Indoor' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'dbo_Investigation', @level2type=N'COLUMN',@level2name=N'InvestigationType'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'0:Tk, 1:Parsentance' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Dbo_Services', @level2type=N'COLUMN',@level2name=N'Commision_Type'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'0:Hour, 1: Day' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Dbo_Services', @level2type=N'COLUMN',@level2name=N'Duraion_Type'
+GO
